@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#c8102e">
+  <title>Iniciar sesión | Portal de acceso</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #202332;
+      background: #f7f7f9;
+    }
+    * { box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 28px 18px;
+      position: relative;
+      isolation: isolate;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background: linear-gradient(90deg, #d9102b 0 33.333%, #fff 33.333% 66.666%, #d9102b 66.666% 100%);
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(135deg, rgba(20, 24, 38, .28), rgba(20, 24, 38, .08));
+    }
+    .layout {
+      width: min(100%, 980px);
+      display: grid;
+      grid-template-columns: 1fr minmax(320px, 430px);
+      align-items: center;
+      gap: clamp(28px, 6vw, 76px);
+    }
+    .intro {
+      color: #fff;
+      text-shadow: 0 2px 18px rgba(0,0,0,.18);
+      padding: 20px 0;
+    }
+    .flag-mark {
+      width: 64px;
+      height: 44px;
+      display: flex;
+      overflow: hidden;
+      border-radius: 9px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.18);
+      margin-bottom: 28px;
+    }
+    .flag-mark span { flex: 1; }
+    .flag-mark span:first-child, .flag-mark span:last-child { background: #d9102b; }
+    .flag-mark span:nth-child(2) { background: #fff; }
+    .eyebrow {
+      margin: 0 0 12px;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    h1 {
+      max-width: 470px;
+      margin: 0;
+      font-size: clamp(2.4rem, 5vw, 4.25rem);
+      line-height: 1.03;
+      letter-spacing: -.055em;
+    }
+    .intro-copy {
+      max-width: 390px;
+      margin: 20px 0 0;
+      color: rgba(255,255,255,.92);
+      font-size: 1.04rem;
+      line-height: 1.7;
+    }
+    .login-card {
+      width: 100%;
+      padding: clamp(28px, 5vw, 42px);
+      border: 1px solid rgba(255,255,255,.7);
+      border-radius: 24px;
+      background: rgba(255,255,255,.96);
+      box-shadow: 0 24px 80px rgba(30, 20, 30, .24);
+      backdrop-filter: blur(12px);
+    }
+    .card-topline {
+      width: 46px;
+      height: 5px;
+      border-radius: 20px;
+      background: #d9102b;
+      margin-bottom: 24px;
+    }
+    h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      letter-spacing: -.04em;
+    }
+    .subtitle {
+      margin: 9px 0 28px;
+      color: #737887;
+      line-height: 1.55;
+      font-size: .95rem;
+    }
+    .field { margin-bottom: 19px; }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: .88rem;
+      font-weight: 700;
+      color: #353949;
+    }
+    input {
+      width: 100%;
+      height: 52px;
+      padding: 0 15px;
+      border: 1px solid #dfe1e8;
+      border-radius: 12px;
+      outline: none;
+      background: #fff;
+      color: #202332;
+      font: inherit;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    input::placeholder { color: #a3a7b2; }
+    input:focus {
+      border-color: #d9102b;
+      box-shadow: 0 0 0 4px rgba(217,16,43,.1);
+    }
+    .password-wrap { position: relative; }
+    .password-wrap input { padding-right: 74px; }
+    .toggle-password {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+      border: 0;
+      background: transparent;
+      color: #a10d24;
+      font: inherit;
+      font-size: .8rem;
+      font-weight: 800;
+      cursor: pointer;
+      padding: 8px 4px;
+    }
+    .options {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 4px 0 24px;
+      color: #626879;
+      font-size: .83rem;
+    }
+    .remember {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-weight: 500;
+      margin: 0;
+    }
+    .remember input {
+      width: 16px;
+      height: 16px;
+      accent-color: #c8102e;
+      margin: 0;
+    }
+    .help { color: #a10d24; font-weight: 700; }
+    .submit {
+      width: 100%;
+      min-height: 53px;
+      border: 0;
+      border-radius: 12px;
+      color: #fff;
+      background: linear-gradient(105deg, #b90e2b, #e21b37);
+      font: inherit;
+      font-weight: 800;
+      letter-spacing: .01em;
+      cursor: pointer;
+      box-shadow: 0 10px 22px rgba(200,16,46,.22);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 26px rgba(200,16,46,.28);
+    }
+    .notice {
+      display: none;
+      margin: 16px 0 0;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: #fff4e5;
+      color: #80500b;
+      font-size: .84rem;
+      line-height: 1.5;
+    }
+    .notice.visible { display: block; }
+    .card-footer {
+      margin: 24px 0 0;
+      color: #858a97;
+      font-size: .78rem;
+      line-height: 1.6;
+      text-align: center;
+    }
+    @media (max-width: 720px) {
+      .layout { grid-template-columns: 1fr; max-width: 440px; gap: 18px; }
+      .intro { text-align: center; padding: 8px 0 0; }
+      .flag-mark { margin: 0 auto 16px; width: 52px; height: 36px; }
+      .intro h1 { margin-inline: auto; font-size: clamp(2rem, 9vw, 3rem); }
+      .intro-copy { margin: 12px auto 0; font-size: .92rem; }
+      .login-card { padding: 28px 24px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="layout">
+    <section class="intro" aria-label="Bienvenida">
+      <div class="flag-mark" aria-label="Bandera del Perú" role="img">
+        <span></span><span></span><span></span>
+      </div>
+      <p class="eyebrow">Orgullo que nos une</p>
+      <h1>Bienvenido a tu espacio.</h1>
+      <p class="intro-copy">Ingresa tus datos para continuar y acceder a tu plataforma.</p>
+    </section>
+
+    <section class="login-card" aria-labelledby="login-title">
+      <div class="card-topline"></div>
+      <h2 id="login-title">Iniciar sesión</h2>
+      <p class="subtitle">Escribe tus credenciales para ingresar a tu cuenta.</p>
+
+      <form id="login-form">
+        <div class="field">
+          <label for="email">Correo electrónico</label>
+          <input id="email" name="email" type="email" placeholder="tucorreo@ejemplo.com" autocomplete="username" required>
+        </div>
+
+        <div class="field">
+          <label for="password">Contraseña</label>
+          <div class="password-wrap">
+            <input id="password" name="password" type="password" placeholder="Ingresa tu contraseña" autocomplete="current-password" required>
+            <button class="toggle-password" id="toggle-password" type="button" aria-label="Mostrar contraseña" aria-pressed="false">Mostrar</button>
+          </div>
+        </div>
+
+        <div class="options">
+          <label class="remember"><input type="checkbox" name="remember"> Recordarme</label>
+          <span class="help">¿Necesitas ayuda?</span>
+        </div>
+
+        <button class="submit" type="submit">Ingresar</button>
+        <p class="notice" id="notice" role="status">La pantalla está lista. Para validar usuarios y contraseñas, falta conectar este formulario con un sistema de autenticación en el servidor.</p>
+      </form>
+
+      <p class="card-footer">Acceso de usuario · Interfaz de demostración</p>
+    </section>
+  </main>
+
+  <script>
+    const password = document.getElementById("password");
+    const toggle = document.getElementById("toggle-password");
+    const form = document.getElementById("login-form");
+    const notice = document.getElementById("notice");
+
+    toggle.addEventListener("click", () => {
+      const showing = password.type === "password";
+      password.type = showing ? "text" : "password";
+      toggle.textContent = showing ? "Ocultar" : "Mostrar";
+      toggle.setAttribute("aria-label", showing ? "Ocultar contraseña" : "Mostrar contraseña");
+      toggle.setAttribute("aria-pressed", String(showing));
+    });
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      notice.classList.add("visible");
+    });
+  </script>
+</body>
+</html>
